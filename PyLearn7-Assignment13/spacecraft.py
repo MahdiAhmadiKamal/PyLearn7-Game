@@ -1,9 +1,9 @@
 
 import arcade
 
-class Spacecraft:
-    ...
-
+class Spacecraft(arcade.Sprite):
+    def __init__(self):
+        super.__init__()
 class Enemy:
     ...
 
@@ -21,4 +21,6 @@ class Game(arcade.Window):
 
 window = Game()
 arcade.run()
+
+
 
