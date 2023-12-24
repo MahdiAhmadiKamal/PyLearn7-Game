@@ -8,6 +8,8 @@ class Spacecraft(arcade.Sprite):
         self.center_y= 80
         self.width = 64
         self.height = 48
+
+
 class Enemy:
     ...
 
