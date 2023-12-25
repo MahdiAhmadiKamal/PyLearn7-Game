@@ -15,14 +15,15 @@ class Enemy(arcade.Sprite):
     def __init__(self, w, h):
         super().__init__(":resources:images/space_shooter/playerShip3_orange.png")
         self.center_x = random.randint(0, w)
-        self.center_y = h
+        self.center_y = h + self.height/2
         self.angle = 180
         self.width = 64
         self.height = 48
+        self.speed = 4
 
 class Game(arcade.Window):
     def __init__(self):
-        super().__init__(width=1000, height=700, title="Spacecraft Game")
+        super().__init__(width=800, height=700, title="Spacecraft Game")
         arcade.set_background_color(arcade.color.DARK_BLUE)
         self.background = arcade.load_texture(":resources:images/backgrounds/stars.png")
         self.me = Spacecraft(self.width)
@@ -43,8 +44,13 @@ class Game(arcade.Window):
         if symbol==100:   #right direction
             self.me.center_x = self.me.center_x + self.me.speed
 
+    def on_update(self, delta_time: float):
+        self.enem.center_y -= self.enem.speed
+
 window = Game()
 arcade.run()
+
+
 
 
 
