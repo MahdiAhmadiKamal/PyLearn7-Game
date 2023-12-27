@@ -4,22 +4,22 @@ import arcade
 
 class Spacecraft(arcade.Sprite):
     def __init__(self, w):
-        super().__init__(":resources:images/space_shooter/playerShip1_green.png")
+        super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment13\my_spacecraft.png")
         self.center_x = w//2
         self.center_y= 80
-        self.width = 64
-        self.height = 48
+        self.width = 120
+        self.height = 120
         self.speed = 8
 
 class Enemy(arcade.Sprite):
     def __init__(self, w, h):
-        super().__init__(":resources:images/space_shooter/playerShip3_orange.png")
+        super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment13\pngaaa.com-1335885.png")
         self.center_x = random.randint(0, w)
-        self.center_y = h + self.height/2
-        self.angle = 180
-        self.width = 64
-        self.height = 48
-        self.speed = 4
+        self.center_y = h
+        self.angle = -90
+        self.width = 100
+        self.height = 75
+        self.speed = 2
 
 class Game(arcade.Window):
     def __init__(self):
