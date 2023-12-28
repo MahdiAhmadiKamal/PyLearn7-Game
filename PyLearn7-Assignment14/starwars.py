@@ -7,9 +7,15 @@ class Spacecraft(arcade.Sprite):
         super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment13\my_spacecraft.png")
         self.center_x = w//2
         self.center_y= 80
-        self.width = 120
-        self.height = 120
+        self.width = 100
+        self.height = 100
         self.speed = 8
+
+    def move(self, direction):
+        if direction == "L":
+            self.center_x = self.center_x - self.speed
+        elif direction == "R":
+            self.center_x = self.center_x + self.speed
 
 class Enemy(arcade.Sprite):
     def __init__(self, w, h):
@@ -20,6 +26,9 @@ class Enemy(arcade.Sprite):
         self.width = 100
         self.height = 75
         self.speed = 2
+
+    def move(self):
+        self.center_y -= self.speed
 
 class Game(arcade.Window):
     def __init__(self):
@@ -37,15 +46,16 @@ class Game(arcade.Window):
         self.enem.draw()
 
     def on_key_press(self, symbol: int, modifiers: int):
-        print("yek dokme feshar dade shod.")
         
-        if symbol==97:    #left direction
-            self.me.center_x = self.me.center_x - self.me.speed
-        if symbol==100:   #right direction
-            self.me.center_x = self.me.center_x + self.me.speed
+        if symbol==arcade.key.A or symbol==arcade.key.LEFT:    #left direction
+            self.me.move("L")
+        if symbol==arcade.key.D or symbol==arcade.key.RIGHT:   #right direction
+            self.me.move("R")
+        if symbol==arcade.key.SPACE:
+            ...
 
     def on_update(self, delta_time: float):
-        self.enem.center_y -= self.enem.speed
+        self.enem.move()
 
 window = Game()
 arcade.run()
