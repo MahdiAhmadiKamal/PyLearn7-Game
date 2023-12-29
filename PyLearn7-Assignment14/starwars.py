@@ -7,14 +7,22 @@ class Spacecraft(arcade.Sprite):
         super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment13\my_spacecraft.png")
         self.center_x = w//2
         self.center_y= 80
+        self.change_x = -1
+        self.change_y = 0
         self.width = 100
         self.height = 100
-        self.speed = 8
+        self.speed = 4
 
-    def move(self, direction):
-        if direction == "L":
+    # def move(self, direction):
+    #     if direction == "L":
+    #         self.center_x = self.center_x - self.speed
+    #     elif direction == "R":
+    #         self.center_x = self.center_x + self.speed
+
+    def move(self):
+        if self.change_x == -1:
             self.center_x = self.center_x - self.speed
-        elif direction == "R":
+        elif self.change_x == 1:
             self.center_x = self.center_x + self.speed
 
 class Enemy(arcade.Sprite):
@@ -51,14 +59,18 @@ class Game(arcade.Window):
     def on_key_press(self, symbol: int, modifiers: int):
         
         if symbol==arcade.key.A or symbol==arcade.key.LEFT:    #left direction
-            self.me.move("L")
+            # self.me.move("L")
+            self.me.change_x = -1
         if symbol==arcade.key.D or symbol==arcade.key.RIGHT:   #right direction
-            self.me.move("R")
+            # self.me.move("R")
+            self.me.change_x = 1
         if symbol==arcade.key.SPACE:
             ...
 
     def on_update(self, delta_time: float):
         # self.enem.move()
+        self.me.move()
+
         for enem in self.enems:
             enem.move()
 
