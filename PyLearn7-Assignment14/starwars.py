@@ -23,8 +23,8 @@ class Enemy(arcade.Sprite):
         self.center_x = random.randint(0, w)
         self.center_y = h
         self.angle = -90
-        self.width = 100
-        self.height = 75
+        self.width = 90
+        self.height = 67.5
         self.speed = 2
 
     def move(self):
@@ -61,9 +61,10 @@ class Game(arcade.Window):
         # self.enem.move()
         for enem in self.enems:
             enem.move()
-            
-        self.new_enem = Enemy(self.width, self.height)
-        self.enems.append(self.new_enem)
+
+        if random.randint(1, 80)==6:   
+            self.new_enem = Enemy(self.width, self.height)
+            self.enems.append(self.new_enem)
 
 window = Game()
 arcade.run()
