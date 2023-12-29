@@ -36,14 +36,17 @@ class Game(arcade.Window):
         arcade.set_background_color(arcade.color.DARK_BLUE)
         self.background = arcade.load_texture(":resources:images/backgrounds/stars.png")
         self.me = Spacecraft(self.width)
-        self.enem = Enemy(self.width, self.height)
+        # self.enem = Enemy(self.width, self.height)
+        self.enems = []
 
     # methods
     def on_draw(self):
         arcade.start_render()
         arcade.draw_lrwh_rectangle_textured(0,0,self.width, self.height, self.background)
         self.me.draw()
-        self.enem.draw()
+        # self.enem.draw()
+        for enem in self.enems:
+            enem.draw()
 
     def on_key_press(self, symbol: int, modifiers: int):
         
@@ -55,7 +58,12 @@ class Game(arcade.Window):
             ...
 
     def on_update(self, delta_time: float):
-        self.enem.move()
+        # self.enem.move()
+        for enem in self.enems:
+            enem.move()
+            
+        self.new_enem = Enemy(self.width, self.height)
+        self.enems.append(self.new_enem)
 
 window = Game()
 arcade.run()
