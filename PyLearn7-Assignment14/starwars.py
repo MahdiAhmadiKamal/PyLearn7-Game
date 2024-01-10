@@ -72,6 +72,9 @@ class Game(arcade.Window):
         elif symbol==arcade.key.SPACE:
             ...
 
+    def on_key_release(self, symbol: int, modifiers: int):
+        self.me.change_x = 0   
+        
     def on_update(self, delta_time: float):
         # self.enem.move()
         self.me.move()
