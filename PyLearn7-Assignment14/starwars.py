@@ -101,6 +101,12 @@ class Game(arcade.Window):
                 print ("Game Over!")
                 exit(0)
 
+        for enem in self.enems:
+            for bullet in self.me.bullet_list:
+                if arcade.check_for_collision(enem, bullet):
+                    self.enems.remove(enem)
+                    self.me.bullet_list.remove(bullet)
+                    
         # self.enem.move()
         self.me.move()
 
@@ -109,7 +115,7 @@ class Game(arcade.Window):
 
         for bullet in self.me.bullet_list:
             bullet.move()
-            
+
         if random.randint(1, 80)==6:   
             self.new_enem = Enemy(self.width, self.height)
             self.enems.append(self.new_enem)
