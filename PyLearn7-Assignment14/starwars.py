@@ -2,6 +2,18 @@ import random
 import arcade
 # from spacecraft import Spacecraft
 
+class Bullet(arcade.Sprite):
+    def __init__(self, host):
+        super().__init__(":resources:images/space_shooter/laserRed01.png")
+        self.center_x = host.center_x
+        self.center_y = host.center_y
+        self.speed = 4
+        self.change_x = 0
+        self.change_y = 1
+
+    def move(self):
+        self.center_y += self.speed
+
 class Spacecraft(arcade.Sprite):
     def __init__(self, w):
         super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment13\my_spacecraft.png")
@@ -13,6 +25,7 @@ class Spacecraft(arcade.Sprite):
         self.height = 100
         self.speed = 4
         self.game_width = w
+        self.bullet_list = []
 
     # def move(self, direction):
     #     if direction == "L":
@@ -27,6 +40,10 @@ class Spacecraft(arcade.Sprite):
         elif self.change_x == 1:
             if self.center_x < self.game_width:
                 self.center_x = self.center_x + self.speed      # or self.center_x += self.speed
+
+    def fire(self):
+        new_bullet = Bullet(self)
+        self.bullet_list.append(new_bullet)
 
 class Enemy(arcade.Sprite):
     def __init__(self, w, h):
@@ -59,6 +76,9 @@ class Game(arcade.Window):
         for enem in self.enems:
             enem.draw()
 
+        for bullet in self.me.bullet_list:
+            bullet.draw()
+
     def on_key_press(self, symbol: int, modifiers: int):
         
         if symbol==arcade.key.A or symbol==arcade.key.LEFT:    #left direction
@@ -70,18 +90,26 @@ class Game(arcade.Window):
         elif symbol==arcade.key.S or symbol==arcade.key.DOWN:   #stop
             self.me.change_x = 0
         elif symbol==arcade.key.SPACE:
-            ...
+            self.me.fire()
 
     def on_key_release(self, symbol: int, modifiers: int):
         self.me.change_x = 0   
         
     def on_update(self, delta_time: float):
+        for enem in self.enems:
+            if arcade.check_for_collision(self.me, enem):
+                print ("Game Over!")
+                exit(0)
+
         # self.enem.move()
         self.me.move()
 
         for enem in self.enems:
             enem.move()
 
+        for bullet in self.me.bullet_list:
+            bullet.move()
+            
         if random.randint(1, 80)==6:   
             self.new_enem = Enemy(self.width, self.height)
             self.enems.append(self.new_enem)
