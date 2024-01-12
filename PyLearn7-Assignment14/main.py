@@ -1,62 +1,8 @@
 import random
 import arcade
+from spacecraft import Spacecraft
+from enemy import Enemy
 
-
-class Bullet(arcade.Sprite):
-    def __init__(self, host):
-        super().__init__(":resources:images/space_shooter/laserRed01.png")
-        self.center_x = host.center_x
-        self.center_y = host.center_y
-        self.speed = 4
-        self.change_x = 0
-        self.change_y = 1
-
-    def move(self):
-        self.center_y += self.speed
-
-class Spacecraft(arcade.Sprite):
-    def __init__(self, w):
-        super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment13\my_spacecraft.png")
-        self.center_x = w//2
-        self.center_y= 80
-        self.change_x = 0
-        self.change_y = 0
-        self.width = 100
-        self.height = 100
-        self.speed = 4
-        self.game_width = w
-        self.bullet_list = []
-
-    # def move(self, direction):
-    #     if direction == "L":
-    #         self.center_x = self.center_x - self.speed
-    #     elif direction == "R":
-    #         self.center_x = self.center_x + self.speed
-
-    def move(self):
-        if self.change_x == -1:
-            if self.center_x > 0:
-                self.center_x = self.center_x - self.speed      # or self.center_x -= self.speed
-        elif self.change_x == 1:
-            if self.center_x < self.game_width:
-                self.center_x = self.center_x + self.speed      # or self.center_x += self.speed
-
-    def fire(self):
-        new_bullet = Bullet(self)
-        self.bullet_list.append(new_bullet)
-
-class Enemy(arcade.Sprite):
-    def __init__(self, w, h):
-        super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment13\enemy.png")
-        self.center_x = random.randint(0, w)
-        self.center_y = h + self.height/2
-        self.angle = -90
-        self.width = 90
-        self.height = 67.5
-        self.speed = 2
-
-    def move(self):
-        self.center_y -= self.speed
 
 class Game(arcade.Window):
     def __init__(self):
@@ -126,8 +72,3 @@ class Game(arcade.Window):
 
 window = Game()
 arcade.run()
-
-
-
-
-
