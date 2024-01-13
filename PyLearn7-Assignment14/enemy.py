@@ -12,5 +12,6 @@ class Enemy(arcade.Sprite):
         self.height = 67.5
         self.speed = 2
 
-    def move(self):
+    def move(self,accel):
         self.center_y -= self.speed
+        self.speed += accel

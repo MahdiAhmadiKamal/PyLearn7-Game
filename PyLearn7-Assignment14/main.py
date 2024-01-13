@@ -59,9 +59,12 @@ class Game(arcade.Window):
 
         # self.enemy.move()
         self.me.move()
-
+        
         for enemy in self.enemies:
-            enemy.move()
+            enemy.move(0.2)
+
+        # for enemy in self.enemies:
+        #     enemy.move()
 
         for bullet in self.me.bullet_list:
             bullet.move()
