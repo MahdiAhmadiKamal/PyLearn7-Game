@@ -126,9 +126,13 @@ class Game(arcade.Window):
             bullet.move()
 
         for enemy in self.enemies:
-            if enemy.center_y < 0:
+            if enemy.center_y + enemy.height/2 < 0:
                self.enemies.remove(enemy)  
         
+        for bullet in self.me.bullet_list:
+            if bullet.center_y <0:
+                self.me.bullet_list.remove(bullet)
+                
         if (self.end_time-self.start_time) >= self.enemy_gap_time:
             self.new_enemy = Enemy(self.width, self.height)
             self.enemies.append(self.new_enemy)
