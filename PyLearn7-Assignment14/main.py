@@ -71,14 +71,13 @@ class Game(arcade.Window):
         
         
         for enemy in self.enemies_list:
-            if enemy.center_y<0:
-              
-                    try:
-                        self.heart_list.remove(self.heart_list[-1])
-                        print("1")
-                    except(IndexError):
-                        pass
-
+            if enemy.center_y + enemy.height/2 <0:
+          
+                # try:
+                self.enemies_list.remove(enemy)
+                self.heart_list.remove(self.heart_list[-1])
+                # except(IndexError):
+                    # pass
 
         for enemy in self.enemies_list:
             for bullet in self.me.bullet_list:
@@ -98,9 +97,9 @@ class Game(arcade.Window):
         for bullet in self.me.bullet_list:
             bullet.move()
 
-        for enemy in self.enemies_list:
-            if enemy.center_y + enemy.height/2 < 0:  # + enemy.height/2 <
-               self.enemies_list.remove(enemy)  
+        # for enemy in self.enemies_list:
+        #     if enemy.center_y + enemy.height/2 < 0:  
+        #        self.enemies_list.remove(enemy)  
 
         for bullet in self.me.bullet_list:
             if bullet.center_y <0:
