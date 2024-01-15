@@ -68,48 +68,16 @@ class Game(arcade.Window):
                 print ("Game Over!")
                 exit(0)
         
-        # for enemy in self.enemies_list:
-            
-        #     if enemy.center_y + enemy.height/2 < 0:
-        #         self.heart_list.pop(2)
-                    
         
-        # for enemy in self.enemies_list:
-        #     if enemy.center_y<0: 
-        #         for heart in self.heart_list:
-        #             self.heart_list.pop(2)
-
-        # j=2
-        # for enemy in self.enemies_list:
-        #     for i in range (len(self.heart_list)):
-        #         if enemy.center_y<0: 
-        #             # try:
-        #                 self.heart_list.pop(j+i-2)
-        #             # except(IndexError):
-        #             #     pass
-        #         break
-
-        # while len(self.heart_list)>0:
-        j=0
+        
         for enemy in self.enemies_list:
             if enemy.center_y<0:
-                j+=1
-                if j==1:
-                    # try:
+              
+                    try:
                         self.heart_list.remove(self.heart_list[-1])
-                    # except(IndexError):
-                        # pass
-                elif j==2:
-                    # try:
-                        self.heart_list.remove(self.heart_list[-1])
-                    # except(IndexError):
-                        # pass
-                elif j==3:
-                    # try:
-                        self.heart_list.remove(self.heart_list[-1])
-                    # except(IndexError):
-                    #     pass
-
+                        print("1")
+                    except(IndexError):
+                        pass
 
 
         for enemy in self.enemies_list:
