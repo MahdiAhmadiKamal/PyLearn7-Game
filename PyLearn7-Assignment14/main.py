@@ -10,14 +10,14 @@ class Game(arcade.Window):
     def __init__(self):
         super().__init__(width=600, height=700, title="Star Wars Game")
         arcade.set_background_color(arcade.color.DARK_BLUE)
-        self.background = arcade.load_texture(":resources:images/backgrounds/stars.png")
+        self.background = arcade.load_texture(":resources:images/backgrounds/stars.png") 
         self.me = Spacecraft(self.width)
         # self.enemy = Enemy(self.width, self.height)
         self.enemies_list = []
         self.start_time = time.time()
         self.enemy_gap_time = 3
         self.heart_list = [None, None, None]
-        
+        self.condition = ""
 
     # methods
     def on_draw(self):
@@ -35,11 +35,11 @@ class Game(arcade.Window):
         for heart in self.heart_list: 
             heart.draw()
 
-        # for i in range (len(self.heart_list)):
-        #     self.heart_list[i].draw()
-
+        if self.condition == "Game Over":
+            arcade.start_render()
+            arcade.set_background_color(arcade.color.BLACK)
+            arcade.draw_text("Game Over",self.width/4, self.height/2, arcade.color.WHITE, 45)
         
-
     def on_key_press(self, symbol: int, modifiers: int):
         
         if symbol==arcade.key.A or symbol==arcade.key.LEFT:    #left direction
@@ -65,20 +65,19 @@ class Game(arcade.Window):
 
         for enemy in self.enemies_list:
             if arcade.check_for_collision(self.me, enemy):
+                self.condition = "Game Over"
                 print ("Game Over!")
-                exit(0)
-        
-        
-        
+                # exit(0)
+
         for enemy in self.enemies_list:
-            if enemy.center_y + enemy.height/2 <0:
+            if len(self.heart_list) == 0:
+                self.condition = "Game Over"
+                # exit(0)
+            elif enemy.center_y + enemy.height/2 <0:
           
-                # try:
                 self.enemies_list.remove(enemy)
                 self.heart_list.remove(self.heart_list[-1])
-                # except(IndexError):
-                    # pass
-
+                
         for enemy in self.enemies_list:
             for bullet in self.me.bullet_list:
                 if arcade.check_for_collision(enemy, bullet):

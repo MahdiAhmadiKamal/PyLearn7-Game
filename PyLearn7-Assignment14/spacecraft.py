@@ -28,7 +28,4 @@ class Spacecraft(arcade.Sprite):
         new_bullet = Bullet(self)
         self.bullet_list.append(new_bullet)
 
-    # def life(self):
-    #     new_life = Heart(self)
-    #     self.heart_list.append(new_life)
 

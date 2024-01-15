@@ -2,6 +2,13 @@ import random
 import time
 import arcade
 
+class Heart(arcade.Sprite):
+    def __init__(self):
+        super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment14\heart.png")
+        self.center_x = 0
+        self.center_y = 20
+        self.width = 25
+        self.height = 25
 
 class Bullet(arcade.Sprite):
     def __init__(self, host):
@@ -70,7 +77,8 @@ class Game(arcade.Window):
         self.enemies_list = []
         self.start_time = time.time()
         self.enemy_gap_time = 3
-
+        self.heart_list = [None, None, None]
+        self.condition = ""
 
     # methods
     def on_draw(self):
@@ -83,7 +91,14 @@ class Game(arcade.Window):
 
         for bullet in self.me.bullet_list:
             bullet.draw()
+        
+        for heart in self.heart_list: 
+            heart.draw()
 
+        if self.condition == "Game Over":
+            arcade.start_render()
+            arcade.set_background_color(arcade.color.BLACK)
+            arcade.draw_text("Game Over",self.width/4, self.height/2, arcade.color.WHITE, 45)
 
 
     def on_key_press(self, symbol: int, modifiers: int):
@@ -104,10 +119,25 @@ class Game(arcade.Window):
         
     def on_update(self, delta_time: float):
         self.end_time = time.time()
+
+        for i in range(len(self.heart_list)):
+            self.heart_list[i]=Heart()
+            self.heart_list[i].center_x=30*i+30
+
         for enemy in self.enemies_list:
             if arcade.check_for_collision(self.me, enemy):
+                self.condition = "Game Over"
                 print ("Game Over!")
-                exit(0)
+                # exit(0)
+
+        for enemy in self.enemies_list:
+            if len(self.heart_list) == 0:
+                self.condition = "Game Over"
+                # exit(0)
+            elif enemy.center_y + enemy.height/2 <0:
+          
+                self.enemies_list.remove(enemy)
+                self.heart_list.remove(self.heart_list[-1])
 
         for enemy in self.enemies_list:
             for bullet in self.me.bullet_list:
@@ -127,9 +157,9 @@ class Game(arcade.Window):
         for bullet in self.me.bullet_list:
             bullet.move()
 
-        for enemy in self.enemies_list:
-            if enemy.center_y + enemy.height/2 < 0:
-               self.enemies_list.remove(enemy)  
+        # for enemy in self.enemies_list:
+        #     if enemy.center_y + enemy.height/2 < 0:
+        #        self.enemies_list.remove(enemy)  
         
         for bullet in self.me.bullet_list:
             if bullet.center_y <0:

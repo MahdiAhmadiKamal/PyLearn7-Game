@@ -9,5 +9,3 @@ class Heart(arcade.Sprite):
         self.width = 25
         self.height = 25
     
-    # def reduction(self):
-    #     self.heart_numbers -= 1
