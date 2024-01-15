@@ -1,6 +1,6 @@
 import arcade
 from bullet import Bullet
-
+# from heart import Heart
 
 class Spacecraft(arcade.Sprite):
     def __init__(self, w):
@@ -11,9 +11,10 @@ class Spacecraft(arcade.Sprite):
         self.change_y = 0
         self.width = 100
         self.height = 100
-        self.speed = 4
+        self.speed = 6
         self.game_width = w
         self.bullet_list = []
+        
 
     def move(self):
         if self.change_x == -1:
@@ -26,3 +27,8 @@ class Spacecraft(arcade.Sprite):
     def fire(self):
         new_bullet = Bullet(self)
         self.bullet_list.append(new_bullet)
+
+    # def life(self):
+    #     new_life = Heart(self)
+    #     self.heart_list.append(new_life)
+

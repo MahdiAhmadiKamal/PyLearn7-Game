@@ -24,7 +24,7 @@ class Spacecraft(arcade.Sprite):
         self.change_y = 0
         self.width = 100
         self.height = 100
-        self.speed = 4
+        self.speed = 6
         self.game_width = w
         self.bullet_list = []
 
@@ -54,7 +54,7 @@ class Enemy(arcade.Sprite):
         self.angle = -90
         self.width = 90
         self.height = 67.5
-        self.speed = 2
+        self.speed = 1
 
     def move(self,accel):
         self.center_y -= self.speed
@@ -62,12 +62,12 @@ class Enemy(arcade.Sprite):
 
 class Game(arcade.Window):
     def __init__(self):
-        super().__init__(width=800, height=700, title="Star Wars Game")
+        super().__init__(width=600, height=700, title="Star Wars Game")
         arcade.set_background_color(arcade.color.DARK_BLUE)
         self.background = arcade.load_texture(":resources:images/backgrounds/stars.png")
         self.me = Spacecraft(self.width)
         # self.enemy = Enemy(self.width, self.height)
-        self.enemies = []
+        self.enemies_list = []
         self.start_time = time.time()
         self.enemy_gap_time = 3
 
@@ -78,11 +78,13 @@ class Game(arcade.Window):
         arcade.draw_lrwh_rectangle_textured(0,0,self.width, self.height, self.background)
         self.me.draw()
         # self.enemy.draw()
-        for enemy in self.enemies:
+        for enemy in self.enemies_list:
             enemy.draw()
 
         for bullet in self.me.bullet_list:
             bullet.draw()
+
+
 
     def on_key_press(self, symbol: int, modifiers: int):
         
@@ -102,32 +104,32 @@ class Game(arcade.Window):
         
     def on_update(self, delta_time: float):
         self.end_time = time.time()
-        for enemy in self.enemies:
+        for enemy in self.enemies_list:
             if arcade.check_for_collision(self.me, enemy):
                 print ("Game Over!")
                 exit(0)
 
-        for enemy in self.enemies:
+        for enemy in self.enemies_list:
             for bullet in self.me.bullet_list:
                 if arcade.check_for_collision(enemy, bullet):
-                    self.enemies.remove(enemy)
+                    self.enemies_list.remove(enemy)
                     self.me.bullet_list.remove(bullet)
 
         # self.enemy.move()
         self.me.move()
 
-        for enemy in self.enemies:
-            enemy.move(0.2)
+        for enemy in self.enemies_list:
+            enemy.move(0.15)
 
-        # for enemy in self.enemies:
+        # for enemy in self.enemies_list:
         #     enemy.move()
 
         for bullet in self.me.bullet_list:
             bullet.move()
 
-        for enemy in self.enemies:
+        for enemy in self.enemies_list:
             if enemy.center_y + enemy.height/2 < 0:
-               self.enemies.remove(enemy)  
+               self.enemies_list.remove(enemy)  
         
         for bullet in self.me.bullet_list:
             if bullet.center_y <0:
@@ -135,12 +137,12 @@ class Game(arcade.Window):
                 
         if (self.end_time-self.start_time) >= self.enemy_gap_time:
             self.new_enemy = Enemy(self.width, self.height)
-            self.enemies.append(self.new_enemy)
+            self.enemies_list.append(self.new_enemy)
             self.start_time=time.time()
         
         # if random.randint(1, 80)==6:   
         #     self.new_enemy = Enemy(self.width, self.height)
-        #     self.enemies.append(self.new_enemy)
+        #     self.enemies_list.append(self.new_enemy)
 
 window = Game()
 arcade.run()
