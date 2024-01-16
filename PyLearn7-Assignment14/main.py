@@ -18,11 +18,13 @@ class Game(arcade.Window):
         self.enemy_gap_time = 3
         self.heart_list = [None, None, None]
         self.condition = ""
+        self.score = 0
 
     # methods
     def on_draw(self):
         arcade.start_render()
         arcade.draw_lrwh_rectangle_textured(0,0,self.width, self.height, self.background)
+        arcade.draw_text(self.score, self.width-50, 15, arcade.color.WHITE, 20)
         self.me.draw()
         # self.my_hearts.draw()
         # self.enemy.draw()
@@ -39,6 +41,7 @@ class Game(arcade.Window):
             arcade.start_render()
             arcade.set_background_color(arcade.color.BLACK)
             arcade.draw_text("Game Over",self.width/4, self.height/2, arcade.color.WHITE, 45)
+        
         
     def on_key_press(self, symbol: int, modifiers: int):
         
@@ -83,6 +86,8 @@ class Game(arcade.Window):
                 if arcade.check_for_collision(enemy, bullet):
                     self.enemies_list.remove(enemy)
                     self.me.bullet_list.remove(bullet)
+                    self.score += 1
+                    
 
         # self.enemy.move()
         self.me.move()

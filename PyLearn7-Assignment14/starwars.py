@@ -79,11 +79,13 @@ class Game(arcade.Window):
         self.enemy_gap_time = 3
         self.heart_list = [None, None, None]
         self.condition = ""
+        self.score = 0
 
     # methods
     def on_draw(self):
         arcade.start_render()
         arcade.draw_lrwh_rectangle_textured(0,0,self.width, self.height, self.background)
+        arcade.draw_text(self.score, self.width-50, 15, arcade.color.WHITE, 20)
         self.me.draw()
         # self.enemy.draw()
         for enemy in self.enemies_list:
@@ -144,6 +146,7 @@ class Game(arcade.Window):
                 if arcade.check_for_collision(enemy, bullet):
                     self.enemies_list.remove(enemy)
                     self.me.bullet_list.remove(bullet)
+                    self.score += 1
 
         # self.enemy.move()
         self.me.move()
