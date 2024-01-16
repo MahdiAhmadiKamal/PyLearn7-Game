@@ -19,7 +19,7 @@ At the beginning of the game you have three lives. Each time invaders enter your
 ## Python
 This program is written using Python language and [arcade](https://api.arcade.academy/en/latest/) which is an easy-to-learn Python library for creating 2D video games.
 
-![Image](Arcade-vs-PyGame_Watermarked.webp)
+![Image](Arcade-vs-PyGame_Watermarked.jpg)
 
 
 
