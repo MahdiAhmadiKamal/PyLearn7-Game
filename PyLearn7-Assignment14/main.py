@@ -1,4 +1,3 @@
-import random
 import time
 import arcade
 from spacecraft import Spacecraft
@@ -19,6 +18,8 @@ class Game(arcade.Window):
         self.heart_list = [None, None, None]
         self.condition = ""
         self.score = 0
+        self.shoot_sound = arcade.sound.load_sound(":resources:sounds/laser2.wav")
+        self.explosion_sound = arcade.sound.load_sound(":resources:sounds/explosion2.wav")
 
     # methods
     def on_draw(self):
@@ -41,8 +42,7 @@ class Game(arcade.Window):
             arcade.start_render()
             arcade.set_background_color(arcade.color.BLACK)
             arcade.draw_text("Game Over",self.width/4, self.height/2, arcade.color.WHITE, 45)
-        
-        
+     
     def on_key_press(self, symbol: int, modifiers: int):
         
         if symbol==arcade.key.A or symbol==arcade.key.LEFT:    #left direction
@@ -55,13 +55,14 @@ class Game(arcade.Window):
             self.me.change_x = 0
         elif symbol==arcade.key.SPACE:
             self.me.fire()
+            arcade.sound.play_sound(self.shoot_sound)
 
     def on_key_release(self, symbol: int, modifiers: int):
         self.me.change_x = 0   
         
     def on_update(self, delta_time: float):
         self.end_time = time.time()
-
+        
         for i in range(len(self.heart_list)):
             self.heart_list[i]=Heart()
             self.heart_list[i].center_x=30*i+30
@@ -87,6 +88,7 @@ class Game(arcade.Window):
                     self.enemies_list.remove(enemy)
                     self.me.bullet_list.remove(bullet)
                     self.score += 1
+                    arcade.sound.play_sound(self.explosion_sound)
                     
 
         # self.enemy.move()

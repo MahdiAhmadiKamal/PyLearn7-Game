@@ -80,6 +80,8 @@ class Game(arcade.Window):
         self.heart_list = [None, None, None]
         self.condition = ""
         self.score = 0
+        self.shoot_sound = arcade.sound.load_sound(":resources:sounds/laser2.wav")
+        self.explosion_sound = arcade.sound.load_sound(":resources:sounds/explosion2.wav")
 
     # methods
     def on_draw(self):
@@ -115,6 +117,7 @@ class Game(arcade.Window):
             self.me.change_x = 0
         elif symbol==arcade.key.SPACE:
             self.me.fire()
+            arcade.sound.play_sound(self.shoot_sound)
 
     def on_key_release(self, symbol: int, modifiers: int):
         self.me.change_x = 0   
@@ -147,6 +150,7 @@ class Game(arcade.Window):
                     self.enemies_list.remove(enemy)
                     self.me.bullet_list.remove(bullet)
                     self.score += 1
+                    arcade.sound.play_sound(self.explosion_sound)
 
         # self.enemy.move()
         self.me.move()
