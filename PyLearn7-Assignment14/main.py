@@ -70,7 +70,6 @@ class Game(arcade.Window):
         for enemy in self.enemies_list:
             if arcade.check_for_collision(self.me, enemy):
                 self.condition = "Game Over"
-                print ("Game Over!")
                 # exit(0)
 
         for enemy in self.enemies_list:

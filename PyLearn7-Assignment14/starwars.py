@@ -4,7 +4,7 @@ import arcade
 
 class Heart(arcade.Sprite):
     def __init__(self):
-        super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment14\heart.png")
+        super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment14\pictures\heart.png")
         self.center_x = 0
         self.center_y = 20
         self.width = 25
@@ -24,7 +24,7 @@ class Bullet(arcade.Sprite):
 
 class Spacecraft(arcade.Sprite):
     def __init__(self, w):
-        super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment13\my_spacecraft.png")
+        super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment14\pictures\my_spacecraft.png")
         self.center_x = w//2
         self.center_y= 80
         self.change_x = 0
@@ -55,7 +55,7 @@ class Spacecraft(arcade.Sprite):
 
 class Enemy(arcade.Sprite):
     def __init__(self, w, h):
-        super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment13\enemy.png")
+        super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment14\pictures\enemy.png")
         self.center_x = random.randint(0, w)
         self.center_y = h 
         self.angle = -90
@@ -132,7 +132,6 @@ class Game(arcade.Window):
         for enemy in self.enemies_list:
             if arcade.check_for_collision(self.me, enemy):
                 self.condition = "Game Over"
-                print ("Game Over!")
                 # exit(0)
 
         for enemy in self.enemies_list:

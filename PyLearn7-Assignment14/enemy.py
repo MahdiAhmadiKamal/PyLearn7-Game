@@ -4,7 +4,7 @@ import arcade
 
 class Enemy(arcade.Sprite):
     def __init__(self, w, h):
-        super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment13\enemy.png")
+        super().__init__("D:\PyLearn7\Assignments\PyLearn7-Game\PyLearn7-Assignment14\pictures\enemy.png")
         self.center_x = random.randint(0, w)
         self.center_y = h
         self.angle = -90
