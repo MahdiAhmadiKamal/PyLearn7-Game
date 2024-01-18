@@ -4,7 +4,7 @@ import arcade
 
 class Apple(arcade.Sprite):
     def __init__(self, game):
-        super().__init__("apple2.png")
+        super().__init__("pics/apple2.png")
         self.width = 32
         self.height = 32
         self.center_x = random.randint(10, game.width-10)
@@ -20,6 +20,7 @@ class Snake(arcade.Sprite):
         self.center_x = game.width//2
         self.center_y = game.height//2
         self.color = arcade.color.GREEN
+        self.color2 = arcade.color.ORANGE
         self.change_x = 0
         self.change_y = 0
         self.speed = 4
@@ -27,10 +28,15 @@ class Snake(arcade.Sprite):
         self.body = []
 
     def draw(self):
-        arcade.draw_rectangle_filled(self.center_x, self.center_y, self.width, self.height, self.color)
-        for part in self.body:
-            arcade.draw_rectangle_filled(part['x'], part['y'], self.width, self.height, self.color)
-
+        if self.score == 0:
+            arcade.draw_rectangle_filled(self.center_x, self.center_y, self.width, self.height, self.color)
+        else:
+            for part in self.body:
+                if self.body.index(part)%2==0:
+                    arcade.draw_rectangle_filled(part['x'], part['y'], self.width, self.height, self.color)
+                elif self.body.index(part)%2!=0:
+                    arcade.draw_rectangle_filled(part['x'], part['y'], self.width, self.height, self.color2)
+            
     def move(self):
         self.center_x += self.change_x * self.speed
         self.center_y += self.change_y * self.speed
@@ -56,6 +62,7 @@ class Game(arcade.Window):
         arcade.start_render()
         self.snake.draw()
         self.food.draw()
+        arcade.draw_text(f"score: {self.snake.score}", self.width-100, 15, arcade.color.RED, 15)
         arcade.finish_render()
 
     def on_update(self, delta_time: float):
