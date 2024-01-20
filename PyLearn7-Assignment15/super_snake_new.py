@@ -2,15 +2,43 @@ import random
 import arcade
 
 
-class Apple(arcade.Sprite):
-    def __init__(self, game):
-        super().__init__("pics/apple.png")
+class Fruit(arcade.Sprite):
+    def __init__(self,pic):
+        super().__init__(pic)
         self.width = 32
         self.height = 32
+        # self.center_x = random.randint(10, game.width-10)
+        # self.center_y = random.randint(10, game.height-10)
+        self.change_x = 0
+        self.center_y = 0
+
+class Apple(Fruit):
+    def __init__(self,game):
+        super().__init__("pics/apple.png")
+        
+        # self.width = 32
+        # self.height = 32
         self.center_x = random.randint(10, game.width-10)
         self.center_y = random.randint(10, game.height-10)
-        self.change_x = 0
-        self.change_y = 0
+        self.score = 1
+        # self.change_x = 0
+        # self.change_y = 0
+
+class Pear(Fruit):
+    def __init__(self,game):
+        super().__init__("pics/pear.png")
+    
+        self.center_x = random.randint(10, game.width-10)
+        self.center_y = random.randint(10, game.height-10)
+        self.score = 2
+
+class Chili(Fruit):
+    def __init__(self,game):
+        super().__init__("pics/chili.png")
+    
+        self.center_x = random.randint(10, game.width-10)
+        self.center_y = random.randint(10, game.height-10)
+        self.score = -1
 
 class Snake(arcade.Sprite):
     def __init__(self, game):
@@ -28,9 +56,9 @@ class Snake(arcade.Sprite):
         self.body = []
 
     def draw(self):
-        # if self.score == 0:
+        if self.score == 0:
             arcade.draw_rectangle_filled(self.center_x, self.center_y, self.width, self.height, self.color)
-        # else:
+        else:
             for part in self.body:
                 if self.body.index(part)%2==0:
                     arcade.draw_rectangle_filled(part['x'], part['y'], self.width, self.height, self.color)
@@ -41,14 +69,18 @@ class Snake(arcade.Sprite):
         self.center_x += self.change_x * self.speed
         self.center_y += self.change_y * self.speed
         self.body.append({'x': self.center_x, 'y': self.center_y})
+        
         if len(self.body)> self.score:
-            self.body.pop(0)
+            self.body.pop(0) 
 
     def eat(self, food):
+        self.score += food.score
+        if self.score == 0:
+            game.condition = "Game Over"
+
         del food
-        self.score += 1
         print("score:", self.score)
-        
+       
 
 class Game(arcade.Window):
     def __init__(self):
@@ -56,22 +88,37 @@ class Game(arcade.Window):
         arcade.set_background_color(arcade.color.KHAKI)
 
         self.snake = Snake(self)
-        self.food = Apple(self)
-
+        self.foods = [Apple(self), Pear(self), Chili(self)]
+        self.condition = ""
+            
     def on_draw(self):
         arcade.start_render()
         self.snake.draw()
-        self.food.draw()
+        for food in self.foods:
+
+            food.draw()
+        
         arcade.draw_text(f"score: {self.snake.score}", self.width-100, 15, arcade.color.RED, 15)
+
+        if self.condition == "Game Over":
+            arcade.start_render()
+            arcade.set_background_color(arcade.color.BLACK)
+            arcade.draw_text("Game Over",self.width/5, self.height/2, arcade.color.WHITE, 45)
+
         arcade.finish_render()
 
     def on_update(self, delta_time: float):
         self.snake.move()
 
-        if arcade.check_for_collision(self.snake, self.food):
-            self.snake.eat(self.food)
-            self.food = Apple(self)
-        
+        # if self.snake.center_x==self.width-0.5*(self.snake.center_x) or self.snake.center_y==self.height-0.5*(self.snake.center_y):
+        #     self.condition == "Game Over"
+
+        for food in self.foods:
+            if arcade.check_for_collision(self.snake, food):
+                self.snake.eat(food)
+                print(food.score)
+                self.foods = [Apple(self), Pear(self), Chili(self)]
+
     def on_key_release(self, symbol: int, modifiers: int):
         if symbol == arcade.key.UP:
             self.snake.change_x = 0
