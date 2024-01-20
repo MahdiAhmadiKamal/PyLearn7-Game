@@ -98,26 +98,36 @@ class Game(arcade.Window):
 
             food.draw()
         
-        arcade.draw_text(f"score: {self.snake.score}", self.width-100, 15, arcade.color.RED, 15)
+        arcade.draw_text(f"score: {self.snake.score}", self.width-100, 15, arcade.color.BLACK, 15)
 
         if self.condition == "Game Over":
             arcade.start_render()
-            arcade.set_background_color(arcade.color.BLACK)
-            arcade.draw_text("Game Over",self.width/5, self.height/2, arcade.color.WHITE, 45)
-
+            # arcade.set_background_color(arcade.color.BLACK)
+            arcade.draw_text("Game Over",self.width/5, self.height/2, arcade.color.BLACK, 45)
+            
         arcade.finish_render()
 
     def on_update(self, delta_time: float):
         self.snake.move()
 
-        # if self.snake.center_x==self.width-0.5*(self.snake.center_x) or self.snake.center_y==self.height-0.5*(self.snake.center_y):
-        #     self.condition == "Game Over"
+        if self.snake.center_x>self.width or self.snake.center_x<0:
+            self.condition = "Game Over"
+            
+        if self.snake.center_y>self.height or self.snake.center_y<0:
+            self.condition = "Game Over"
 
         for food in self.foods:
             if arcade.check_for_collision(self.snake, food):
                 self.snake.eat(food)
                 print(food.score)
                 self.foods = [Apple(self), Pear(self), Chili(self)]
+
+        # for part in self.snake.body:
+        #     if self.snake.body[0]['x']==part['x']:
+        
+                
+
+
 
     def on_key_release(self, symbol: int, modifiers: int):
         if symbol == arcade.key.UP:

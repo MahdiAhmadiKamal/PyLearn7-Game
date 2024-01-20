@@ -1,6 +1,9 @@
-a = [2, 6, 3, 4, 9]
-a.pop(-1)
-print(a)
+a = [{'x':2, 'y':6}, {'x':4, 'y':12}]
+# for part in a:
+# print(a[0]['x'])
+for part in a:
+    for i in part:
+        print(part['x'])
 # if a[0::2]:
 #     print(a[0::2])
 
