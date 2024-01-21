@@ -8,7 +8,7 @@
 ## Game Rules
 The player must keep the snake from colliding with both game borders and itself, which gets harder as the snake lengthens. Using the arrow keys, the player can maneuver the snake to eat three type of fruits including apple, pear and chili. The mentioned fruits have different scores in such a way that eating apple and pear, has 1 and 2 scores and lengthens the snake as much as 1 and 2 units respectively. The player must avoid eating chili because eating it has a minus point. If the score drops to zero, the game is over.
 
-![Image](pics/Screenshot.png)
+![Image](pics/Screenshot.jpg)
 
 ---
 ## Super Snake powered by AI
