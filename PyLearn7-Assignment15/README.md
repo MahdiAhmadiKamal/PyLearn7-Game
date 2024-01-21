@@ -2,13 +2,13 @@
 
 **Super Snake V.1.0** is an entertaining simple single-player game. This 2D game is a sub-genre of action video games. In this game the player maneuvers the end of a growing snake. In addition to the primary game, here another type of **Super Snake powered by AI** is presented in a separate python file.
 
-![Image](pics\machine.webp)
+![Image](pics/machine.webp)
 
 ---
 ## Game Rules
 The player must keep the snake from colliding with both game borders and itself, which gets harder as the snake lengthens. Using the arrow keys, the player can maneuver the snake to eat three type of fruits including apple, pear and chili. The mentioned fruits have different scores in such a way that eating apple and pear, has 1 and 2 scores and lengthens the snake as much as 1 and 2 units respectively. The player must avoid eating chili because eating it has a minus point. If the score drops to zero, the game is over.
 
-![Image](pics\Screenshot.png)
+![Image](pics/Screenshot.png)
 
 ---
 ## Super Snake powered by AI
@@ -26,7 +26,7 @@ The player must keep the snake from colliding with both game borders and itself,
 ## Python
 This program is written using Python language and [arcade](https://api.arcade.academy/en/latest/) which is an easy-to-learn Python library for creating 2D video games.
 
-![Image](pics\download.png)
+![Image](pics/download.png)
 
 
 
