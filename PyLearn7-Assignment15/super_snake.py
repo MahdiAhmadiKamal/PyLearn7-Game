@@ -87,6 +87,7 @@ class Game(arcade.Window):
             self.snake.change_y = 0
 
 
+
 if __name__ == "__main__":
     game = Game()
     arcade.run()

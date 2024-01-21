@@ -47,7 +47,7 @@ class Snake(arcade.Sprite):
         self.height = 32
         self.center_x = game.width//2
         self.center_y = game.height//2
-        self.color = arcade.color.GREEN
+        self.color = arcade.color.DARK_GREEN
         self.color2 = arcade.color.ORANGE
         self.change_x = 0
         self.change_y = 0
@@ -56,9 +56,9 @@ class Snake(arcade.Sprite):
         self.body = []
 
     def draw(self):
-        if self.score == 0:
+        # if self.score == 0:
             arcade.draw_rectangle_filled(self.center_x, self.center_y, self.width, self.height, self.color)
-        else:
+        # else:
             for part in self.body:
                 if self.body.index(part)%2==0:
                     arcade.draw_rectangle_filled(part['x'], part['y'], self.width, self.height, self.color)
@@ -66,12 +66,17 @@ class Snake(arcade.Sprite):
                     arcade.draw_rectangle_filled(part['x'], part['y'], self.width, self.height, self.color2)
             
     def move(self):
+        self.body.append({'x': self.center_x, 'y': self.center_y})
+
+        if len(self.body)> self.score:
+            self.body.pop(0)
+
         self.center_x += self.change_x * self.speed
         self.center_y += self.change_y * self.speed
-        self.body.append({'x': self.center_x, 'y': self.center_y})
+        # self.body.append({'x': self.center_x, 'y': self.center_y})
         
-        if len(self.body)> self.score:
-            self.body.pop(0) 
+        # if len(self.body)> self.score:
+        #     self.body.pop(0) 
 
     def eat(self, food):
         self.score += food.score
@@ -124,11 +129,11 @@ class Game(arcade.Window):
 
         # for part in self.snake.body:
         #     if self.snake.body[0]['x']==part['x']:
+
+        for part in self.snake.body:
+            if self.snake.center_x == part["x"] and self.snake.center_y == part["y"]:
+                self.condition = "Game Over"
         
-                
-
-
-
     def on_key_release(self, symbol: int, modifiers: int):
         if symbol == arcade.key.UP:
             self.snake.change_x = 0
