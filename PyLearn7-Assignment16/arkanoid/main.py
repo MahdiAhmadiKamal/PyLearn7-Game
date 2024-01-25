@@ -1,72 +1,8 @@
 import arcade
+from ball import Ball
+from block import Block
+from vaus import Vaus
 
-
-class Ball(arcade.Sprite):
-    def __init__(self, player):
-        super().__init__("pics&sounds/ball.png")
-        self.center_x = player.center_x
-        self.center_y = player.center_y + player.height
-        self.radius = 12.5
-        self.width = 2 * self.radius
-        self.height = 2 * self.radius
-        self.change_x = 0
-        self.change_y = 0
-        self.speed = 6
-
-    def move(self):
-        self.center_x += self.change_x * self.speed
-        self.center_y += self.change_y * self.speed
-
-
-class Block(arcade.Sprite):
-    def __init__(self, x, y, c):
-        super().__init__()
-        self.center_x = x
-        self.center_y = y
-        self.color = c
-        self.width = 60
-        self.height = 30
-
-    def draw(self):
-        arcade.draw_rectangle_filled(self.center_x, self.center_y, self.width, self.height, self.color)
-
-class Vaus(arcade.Sprite):
-    def __init__(self, game):
-        super().__init__()
-        self.center_x = game.width//2
-        self.center_y = 40
-        self.speed = 6
-        self.change_x = 0
-        self.change_y = 0
-        self.color = arcade.color.GREEN
-        self.width = 90
-        self.height = 22
-        self.score = 0
-
-    def move(self, game):                        # for moving the Vaus using the keyboard
-        if game.ball.center_y > self.center_y + self.height//2 + game.ball.radius: 
-            # when the ball is not on the Vaus
-            if self.change_x == -1:
-                if self.center_x - self.width//2 > 0:
-                    self.center_x = self.center_x - self.speed
-            elif self.change_x == 1:
-                if self.center_x + self.width//2 < game.width:
-                    self.center_x = self.center_x + self.speed 
-
-        else:                             
-            # when the ball is on the Vaus
-            if self.change_x == -1:
-                if self.center_x - self.width//2 > 0:
-                    self.center_x = self.center_x - self.speed
-                    game.ball.center_x = game.ball.center_x - self.speed
-            elif self.change_x == 1:
-                if self.center_x + self.width//2 < game.width:
-                    self.center_x = self.center_x + self.speed
-                    game.ball.center_x = game.ball.center_x + self.speed 
-
-    def draw(self):
-        arcade.draw_rectangle_filled(self.center_x, self.center_y, self.width, self.height, self.color)
-        # arcade.draw_rectangle_outline(self.center_x, self.center_y, self.width+3, self.height, arcade.color.DARK_PINK, border_width=3)
 
 class Game(arcade.Window):
     def __init__(self):
@@ -174,8 +110,5 @@ class Game(arcade.Window):
             self.ball.change_y = 1
 
         
-            
-            
-
 game = Game()
 arcade.run()
