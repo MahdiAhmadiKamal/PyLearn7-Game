@@ -19,7 +19,7 @@ Controlling a paddle-like craft known as the ***Vaus***, the player is tasked wi
 |A|Mouse Movement to the Left|move to the left|
 |D|Mouse Movement to the Right|move to the right|
 
-![Image](pics&sounds/Screenshot3.png)
+![Image](pics&sounds/Screenshot3.jpg)
 
 ---
 ## Python
