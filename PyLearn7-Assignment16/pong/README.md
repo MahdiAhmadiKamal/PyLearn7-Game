@@ -1,26 +1,25 @@
-# Super Snake V.1.0 🐍
+# Pong 2024 🏓
 
-**Super Snake V.1.0** is an entertaining simple single-player game. This 2D game is a sub-genre of action video games. In this game the player maneuvers the end of a growing snake. In addition to the primary game, here another type of **Super Snake powered by AI** is presented in a separate python file.
-
-![Image](pics/machine.webp)
-
----
-## Game Rules
-The player must keep the snake from colliding with both game borders and itself, which gets harder as the snake lengthens. Using the arrow keys, the player can maneuver the snake to eat three type of fruits including apple, pear and chili. The mentioned fruits have different scores in such a way that eating apple and pear, has 1 and 2 scores and lengthens the snake as much as 1 and 2 units respectively. The player must avoid eating chili because eating it has a minus point. If the score drops to zero, the game is over.
+**Pong 2024** is a two-dimensional sports game that simulates table tennis.
 
 ![Image](pics/Screenshot.jpg)
 
 ---
-## Super Snake powered by AI
-**Super Snake powered by AI** provides a different type of the game. In this version, without human intervention, the snake will automatically move towards the fruits with positive score (i.e. apple and pear). **Another capability of this version is the comparison of the distance between the snake and any of the two fruits**, so that between apple and pear, it moves towards one that has a smaller distance to the snake. If the distances are the same, the snake chooses the fruit that has more score (i.e. pear).
+## Pong History
+**Pong** is a table tennis–themed twitch arcade sports video game, featuring simple two-dimensional graphics, manufactured by Atari and originally released on 29 November 1972. It was one of the earliest arcade video games; it was created by Allan Alcorn as a training exercise assigned to him by Atari co-founder Nolan Bushnell, but Bushnell and Atari co-founder Ted Dabney were surprised by the quality of Alcorn's work and decided to manufacture the game. Bushnell based the game's concept on an electronic ping-pong game included in the Magnavox Odyssey, the first home video game console. In response, Magnavox later sued Atari for patent infringement.
+
+![Image](pics\Signed_Pong_Cabinet.jpg)
+
+Pong was the first commercially successful video game, and it helped to establish the video game industry along with the Magnavox Odyssey. Soon after its release, several companies began producing games that closely mimicked its gameplay. Eventually, Atari's competitors released new types of video games that deviated from Pong's original format to varying degrees, and this, in turn, led Atari to encourage its staff to move beyond Pong and produce more innovative games themselves.
+
+---
+## Pong 2024 Game Rules
+The player controls an in-game paddle by moving it vertically across the left side of the screen. They compete against another player powered by AI controlling a second paddle on the opposing side. Players use the paddles to hit a ball back and forth. Points are earned when one fails to return the ball to the other and the ball leaves the edge of the playfield.
 
 ## Key Functions
-|Key on Keyboard|Function|
-|-|-------------------------|
-|Left Arrow|move to the left|
-|Right Arrow|move to the right|
-|Up Arrow|move up|
-|Down Arrow|move down|
+|Mouse|Function|
+|-|-----------------|
+|Mouse Movement to Up and Down|moving paddle up and down|
 
 ---
 ## Python
@@ -39,6 +38,3 @@ then run the program:
 ```
 python main.py
 ```
-or run the Super Snake powered by AI:
-```
-python main_ai.py
